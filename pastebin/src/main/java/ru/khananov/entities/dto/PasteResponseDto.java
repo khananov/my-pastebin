@@ -1,4 +1,4 @@
-package ru.khananov.entyties.dto;
+package ru.khananov.entities.dto;
 
 import java.util.Objects;
 

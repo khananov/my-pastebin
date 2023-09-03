@@ -1,6 +1,6 @@
-package ru.khananov.entyties.dto;
+package ru.khananov.entities.dto;
 
-import ru.khananov.entyties.enums.AccessModifier;
+import ru.khananov.entities.enums.AccessModifier;
 
 import java.util.Objects;
 

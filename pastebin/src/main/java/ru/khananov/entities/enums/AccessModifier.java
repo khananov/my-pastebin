@@ -1,4 +1,4 @@
-package ru.khananov.entyties.enums;
+package ru.khananov.entities.enums;
 
 public enum AccessModifier {
     PUBLIC,

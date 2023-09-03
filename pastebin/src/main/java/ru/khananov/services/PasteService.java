@@ -1,10 +1,10 @@
 package ru.khananov.services;
 
-import ru.khananov.entyties.dto.PasteRequestDto;
-import ru.khananov.entyties.dto.PasteResponseDto;
+import ru.khananov.entities.dto.PasteRequestDto;
+import ru.khananov.entities.dto.PasteResponseDto;
 
 public interface PasteService {
     PasteResponseDto getByHash(String hash);
 
-    PasteResponseDto create(PasteRequestDto paste);
+    PasteResponseDto create(PasteRequestDto pasteRequestDto);
 }

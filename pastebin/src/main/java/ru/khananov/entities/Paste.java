@@ -1,8 +1,8 @@
-package ru.khananov.entyties;
+package ru.khananov.entities;
 
 import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
-import ru.khananov.entyties.enums.AccessModifier;
+import ru.khananov.entities.enums.AccessModifier;
 
 import java.time.LocalDateTime;
 import java.util.Objects;
@@ -29,7 +29,7 @@ public class Paste {
     @Enumerated(EnumType.STRING)
     private AccessModifier modifier;
 
-    @Column
+    @Column(columnDefinition = "varchar(255) unique")
     private String hash;
 
     public Paste() {
