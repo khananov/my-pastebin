@@ -32,16 +32,21 @@ public class Paste {
     @Column(columnDefinition = "varchar(255) unique")
     private String hash;
 
+    @ManyToOne
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    private PasteUser user;
+
     public Paste() {
     }
 
-    public Paste(Long id, LocalDateTime created_at, Long expirationTimeSeconds, String payload, AccessModifier modifier, String hash) {
+    public Paste(Long id, LocalDateTime created_at, Long expirationTimeSeconds, String payload, AccessModifier modifier, String hash, PasteUser user) {
         this.id = id;
         this.created_at = created_at;
         this.expirationTimeSeconds = expirationTimeSeconds;
         this.payload = payload;
         this.modifier = modifier;
         this.hash = hash;
+        this.user = user;
     }
 
     public Long getId() {
@@ -92,17 +97,25 @@ public class Paste {
         this.hash = hash;
     }
 
+    public PasteUser getUser() {
+        return user;
+    }
+
+    public void setUser(PasteUser user) {
+        this.user = user;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Paste paste = (Paste) o;
-        return Objects.equals(created_at, paste.created_at) && Objects.equals(expirationTimeSeconds, paste.expirationTimeSeconds) && Objects.equals(payload, paste.payload) && modifier == paste.modifier && Objects.equals(hash, paste.hash);
+        return Objects.equals(id, paste.id) && Objects.equals(created_at, paste.created_at) && Objects.equals(expirationTimeSeconds, paste.expirationTimeSeconds) && Objects.equals(payload, paste.payload) && modifier == paste.modifier && Objects.equals(hash, paste.hash) && Objects.equals(user, paste.user);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(created_at, expirationTimeSeconds, payload, modifier, hash);
+        return Objects.hash(id, created_at, expirationTimeSeconds, payload, modifier, hash, user);
     }
 
     @Override
@@ -110,10 +123,11 @@ public class Paste {
         return "Paste{" +
                 "id=" + id +
                 ", created_at=" + created_at +
-                ", expirationInSeconds=" + expirationTimeSeconds +
+                ", expirationTimeSeconds=" + expirationTimeSeconds +
                 ", payload='" + payload + '\'' +
                 ", modifier=" + modifier +
                 ", hash='" + hash + '\'' +
+                ", user=" + user +
                 '}';
     }
 }

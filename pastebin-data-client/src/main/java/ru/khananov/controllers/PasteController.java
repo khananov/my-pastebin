@@ -9,7 +9,7 @@ import ru.khananov.entities.dto.PasteResponseDto;
 import ru.khananov.services.PasteService;
 
 @RestController
-@RequestMapping("api/pastebin")
+@RequestMapping("api/data")
 public class PasteController {
     private final PasteService pasteService;
 

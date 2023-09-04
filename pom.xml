@@ -19,7 +19,7 @@
 
     <modules>
         <module>eureka-server</module>
-        <module>pastebin</module>
+        <module>pastebin-data-client</module>
         <module>cloud-gateway</module>
     </modules>
 
