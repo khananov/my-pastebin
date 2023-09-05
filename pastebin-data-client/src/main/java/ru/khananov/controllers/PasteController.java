@@ -19,12 +19,20 @@ public class PasteController {
     }
 
     @GetMapping("/{hash}")
-    public ResponseEntity<PasteResponseDto> getByHash(@PathVariable String hash) {
-        return new ResponseEntity<>(pasteService.getByHash(hash), HttpStatus.OK);
+    public ResponseEntity<?> getByHash(@PathVariable String hash) {
+        PasteResponseDto pasteResponseDto = pasteService.getByHash(hash);
+        if (pasteResponseDto == null)
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+
+        return new ResponseEntity<>(pasteResponseDto, HttpStatus.OK);
     }
 
     @PostMapping
-    public ResponseEntity<PasteResponseDto> save(@RequestBody PasteRequestDto pasteRequestDto) {
-        return new ResponseEntity<>(pasteService.create(pasteRequestDto), HttpStatus.OK);
+    public ResponseEntity<?> save(@RequestBody PasteRequestDto pasteRequestDto) {
+        PasteResponseDto pasteResponseDto = pasteService.create(pasteRequestDto);
+        if (pasteResponseDto == null)
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+
+        return new ResponseEntity<>(pasteResponseDto, HttpStatus.CREATED);
     }
 }

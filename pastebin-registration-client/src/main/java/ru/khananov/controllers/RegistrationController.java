@@ -8,23 +8,21 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import ru.khananov.entities.dto.PasteUserRequestDto;
-import ru.khananov.services.PasteUserService;
+import ru.khananov.services.RegistrationService;
 
 @RestController
-@RequestMapping("/api/registration")
-public class PasteUserController {
-    private final PasteUserService pasteUserService;
+@RequestMapping("/pastebin/registration")
+public class RegistrationController {
+    private final RegistrationService registrationService;
 
     @Autowired
-    public PasteUserController(PasteUserService pasteUserService) {
-        this.pasteUserService = pasteUserService;
+    public RegistrationController(RegistrationService registrationService) {
+        this.registrationService = registrationService;
     }
 
     @PostMapping
     public ResponseEntity<?> registration(@RequestBody PasteUserRequestDto pasteUserRequestDto) {
-        if (pasteUserService.registration(pasteUserRequestDto) == null)
-            return new ResponseEntity<>(HttpStatus.EXPECTATION_FAILED);
-
+        registrationService.sendUserRequest(pasteUserRequestDto);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 }
