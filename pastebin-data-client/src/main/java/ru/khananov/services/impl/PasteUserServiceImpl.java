@@ -3,6 +3,7 @@ package ru.khananov.services.impl;
 import org.springframework.stereotype.Service;
 import ru.khananov.entities.PasteUser;
 import ru.khananov.entities.dto.PasteUserRequestDto;
+import ru.khananov.exceptions.PasswordDoesntMatchException;
 import ru.khananov.exceptions.UserAlreadyExistException;
 import ru.khananov.mappers.PasteUserMapper;
 import ru.khananov.repositories.PasteUserRepository;
@@ -20,6 +21,9 @@ public class PasteUserServiceImpl implements PasteUserService {
 
     @Override
     public PasteUserRequestDto registration(PasteUserRequestDto pasteUserRequestDto) {
+        if (pasteUserRequestDto.getPassword() != pasteUserRequestDto.getRepeatPassword())
+            throw new PasswordDoesntMatchException("Password doesn't match");
+
         PasteUser pasteUser =  pasteUserMapper.toEntity(pasteUserRequestDto);
 
         if (pasteUserRepository.findByEmail(pasteUser.getEmail()).isPresent()) {
