@@ -5,6 +5,7 @@ import ru.khananov.entities.PasteUser;
 import ru.khananov.entities.dto.PasteUserRequestDto;
 import ru.khananov.exceptions.PasswordDoesntMatchException;
 import ru.khananov.exceptions.UserAlreadyExistException;
+import ru.khananov.exceptions.UserNotFoundException;
 import ru.khananov.mappers.PasteUserMapper;
 import ru.khananov.repositories.PasteUserRepository;
 import ru.khananov.services.PasteUserService;
@@ -17,6 +18,12 @@ public class PasteUserServiceImpl implements PasteUserService {
     public PasteUserServiceImpl(PasteUserRepository pasteUserRepository, PasteUserMapper pasteUserMapper) {
         this.pasteUserRepository = pasteUserRepository;
         this.pasteUserMapper = pasteUserMapper;
+    }
+
+    @Override
+    public PasteUser getByEmail(String email) {
+        return pasteUserRepository.findByEmail(email)
+                .orElseThrow(() -> new UserNotFoundException(email));
     }
 
     @Override

@@ -22,7 +22,8 @@
         <module>pastebin-data-client</module>
         <module>cloud-gateway</module>
 		<module>pastebin-registration-client</module>
-	</modules>
+        <module>authenticate-service</module>
+    </modules>
 
     <properties>
 		<java.version>17</java.version>

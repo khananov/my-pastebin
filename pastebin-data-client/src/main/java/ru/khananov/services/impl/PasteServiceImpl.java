@@ -40,7 +40,8 @@ public class PasteServiceImpl implements PasteService {
     }
 
     private String createHash(Paste paste) {
-        String uniqueValue = paste.getCreated_at() + paste.getPayload() + paste.getId();
-        return Base64.getEncoder().encodeToString(uniqueValue.getBytes());
+        return Long.toHexString(
+                paste.getId() + paste.getUser().getId() + paste.getCreated_at().getSecond()
+        );
     }
 }
