@@ -2,7 +2,6 @@ package ru.khananov.entities;
 
 import jakarta.persistence.*;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
@@ -18,7 +17,7 @@ public class User {
     private String email;
 
     @Column
-    private char[] password;
+    private String password;
 
     @OneToMany(mappedBy = "user")
     private List<Paste> pastes;
@@ -26,7 +25,7 @@ public class User {
     public User() {
     }
 
-    public User(Long id, String email, char[] password, List<Paste> pastes) {
+    public User(Long id, String email, String password, List<Paste> pastes) {
         this.id = id;
         this.email = email;
         this.password = password;
@@ -49,11 +48,11 @@ public class User {
         this.email = email;
     }
 
-    public char[] getPassword() {
+    public String getPassword() {
         return password;
     }
 
-    public void setPassword(char[] password) {
+    public void setPassword(String password) {
         this.password = password;
     }
 
@@ -70,23 +69,16 @@ public class User {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return Objects.equals(id, user.id) && Objects.equals(email, user.email) && Arrays.equals(password, user.password) && Objects.equals(pastes, user.pastes);
+        return Objects.equals(id, user.id) && Objects.equals(email, user.email) && Objects.equals(password, user.password) && Objects.equals(pastes, user.pastes);
     }
 
     @Override
     public int hashCode() {
-        int result = Objects.hash(id, email, pastes);
-        result = 31 * result + Arrays.hashCode(password);
-        return result;
+        return Objects.hash(id, email, password, pastes);
     }
 
     @Override
     public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", email='" + email + '\'' +
-                ", password=" + Arrays.toString(password) +
-                ", pastes=" + pastes +
-                '}';
+        return super.toString();
     }
 }

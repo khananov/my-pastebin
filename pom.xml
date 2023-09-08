@@ -21,7 +21,6 @@
         <module>eureka-server</module>
         <module>pastebin-data-client</module>
         <module>cloud-gateway</module>
-		<module>pastebin-registration-client</module>
         <module>authenticate-service</module>
     </modules>
 
@@ -29,6 +28,9 @@
 		<java.version>17</java.version>
 		<spring-cloud.version>2022.0.4</spring-cloud.version>
 		<mapstruct.version>1.5.5.Final</mapstruct.version>
+		<springdoc.version>2.2.0</springdoc.version>
+		<jjwt.version>0.11.5</jjwt.version>
+		<jakarta.bind-api.version>4.0.0</jakarta.bind-api.version>
 	</properties>
 
 	<dependencies>
@@ -36,9 +38,16 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
+
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springdoc</groupId>
+			<artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+			<version>${springdoc.version}</version>
 		</dependency>
 
 		<dependency>
@@ -68,5 +77,4 @@
 			</plugin>
 		</plugins>
 	</build>
-
 </project>

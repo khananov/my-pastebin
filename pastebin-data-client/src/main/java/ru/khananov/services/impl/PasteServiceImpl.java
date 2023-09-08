@@ -11,8 +11,6 @@ import ru.khananov.mappers.PasteMapper;
 import ru.khananov.repositories.PasteRepository;
 import ru.khananov.services.PasteService;
 
-import java.util.Base64;
-
 @Service
 public class PasteServiceImpl implements PasteService {
     private final PasteRepository pasteRepository;
@@ -41,7 +39,7 @@ public class PasteServiceImpl implements PasteService {
 
     private String createHash(Paste paste) {
         return Long.toHexString(
-                paste.getId() + paste.getUser().getId() + paste.getCreated_at().getSecond()
+                paste.getId() + paste.getUser().getId() + paste.getCreated_at().getNano()
         );
     }
 }

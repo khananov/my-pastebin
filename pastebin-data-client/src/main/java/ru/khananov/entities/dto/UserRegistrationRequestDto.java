@@ -1,17 +1,16 @@
 package ru.khananov.entities.dto;
 
-import java.util.Arrays;
 import java.util.Objects;
 
 public class UserRegistrationRequestDto {
     private String email;
-    private char[] password;
-    private char[] repeatPassword;
+    private String password;
+    private String repeatPassword;
 
     public UserRegistrationRequestDto() {
     }
 
-    public UserRegistrationRequestDto(String email, char[] password, char[] repeatPassword) {
+    public UserRegistrationRequestDto(String email, String password, String repeatPassword) {
         this.email = email;
         this.password = password;
         this.repeatPassword = repeatPassword;
@@ -25,19 +24,19 @@ public class UserRegistrationRequestDto {
         this.email = email;
     }
 
-    public char[] getPassword() {
+    public String getPassword() {
         return password;
     }
 
-    public void setPassword(char[] password) {
+    public void setPassword(String password) {
         this.password = password;
     }
 
-    public char[] getRepeatPassword() {
+    public String getRepeatPassword() {
         return repeatPassword;
     }
 
-    public void setRepeatPassword(char[] repeatPassword) {
+    public void setRepeatPassword(String repeatPassword) {
         this.repeatPassword = repeatPassword;
     }
 
@@ -46,23 +45,16 @@ public class UserRegistrationRequestDto {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         UserRegistrationRequestDto that = (UserRegistrationRequestDto) o;
-        return Objects.equals(email, that.email) && Arrays.equals(password, that.password) && Arrays.equals(repeatPassword, that.repeatPassword);
+        return Objects.equals(email, that.email) && Objects.equals(password, that.password) && Objects.equals(repeatPassword, that.repeatPassword);
     }
 
     @Override
     public int hashCode() {
-        int result = Objects.hash(email);
-        result = 31 * result + Arrays.hashCode(password);
-        result = 31 * result + Arrays.hashCode(repeatPassword);
-        return result;
+        return Objects.hash(email, password, repeatPassword);
     }
 
     @Override
     public String toString() {
-        return "UserRegistrationRequestDto{" +
-                "email='" + email + '\'' +
-                ", password=" + Arrays.toString(password) +
-                ", repeatPassword=" + Arrays.toString(repeatPassword) +
-                '}';
+        return super.toString();
     }
 }

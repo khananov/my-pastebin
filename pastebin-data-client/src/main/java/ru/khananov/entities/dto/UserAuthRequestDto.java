@@ -1,16 +1,15 @@
 package ru.khananov.entities.dto;
 
-import java.util.Arrays;
 import java.util.Objects;
 
 public class UserAuthRequestDto {
     private String email;
-    private char[] password;
+    private String password;
 
     public UserAuthRequestDto() {
     }
 
-    public UserAuthRequestDto(String email, char[] password) {
+    public UserAuthRequestDto(String email, String password) {
         this.email = email;
         this.password = password;
     }
@@ -23,11 +22,11 @@ public class UserAuthRequestDto {
         this.email = email;
     }
 
-    public char[] getPassword() {
+    public String getPassword() {
         return password;
     }
 
-    public void setPassword(char[] password) {
+    public void setPassword(String password) {
         this.password = password;
     }
 
@@ -36,21 +35,19 @@ public class UserAuthRequestDto {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         UserAuthRequestDto that = (UserAuthRequestDto) o;
-        return Objects.equals(email, that.email) && Arrays.equals(password, that.password);
+        return Objects.equals(email, that.email) && Objects.equals(password, that.password);
     }
 
     @Override
     public int hashCode() {
-        int result = Objects.hash(email);
-        result = 31 * result + Arrays.hashCode(password);
-        return result;
+        return Objects.hash(email, password);
     }
 
     @Override
     public String toString() {
         return "UserAuthRequestDto{" +
                 "email='" + email + '\'' +
-                ", password=" + Arrays.toString(password) +
+                ", password='" + password + '\'' +
                 '}';
     }
 }
