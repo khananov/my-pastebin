@@ -8,7 +8,7 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "paste_users")
-public class PasteUser {
+public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,10 +23,10 @@ public class PasteUser {
     @OneToMany(mappedBy = "user")
     private List<Paste> pastes;
 
-    public PasteUser() {
+    public User() {
     }
 
-    public PasteUser(Long id, String email, char[] password, List<Paste> pastes) {
+    public User(Long id, String email, char[] password, List<Paste> pastes) {
         this.id = id;
         this.email = email;
         this.password = password;
@@ -69,8 +69,8 @@ public class PasteUser {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        PasteUser pasteUser = (PasteUser) o;
-        return Objects.equals(id, pasteUser.id) && Objects.equals(email, pasteUser.email) && Arrays.equals(password, pasteUser.password) && Objects.equals(pastes, pasteUser.pastes);
+        User user = (User) o;
+        return Objects.equals(id, user.id) && Objects.equals(email, user.email) && Arrays.equals(password, user.password) && Objects.equals(pastes, user.pastes);
     }
 
     @Override
@@ -82,7 +82,7 @@ public class PasteUser {
 
     @Override
     public String toString() {
-        return "PasteUser{" +
+        return "User{" +
                 "id=" + id +
                 ", email='" + email + '\'' +
                 ", password=" + Arrays.toString(password) +

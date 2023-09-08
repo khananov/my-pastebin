@@ -6,11 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
-import org.springframework.web.servlet.function.ServerRequest;
-import ru.khananov.entities.dto.PasteUserRequestDto;
+import ru.khananov.entities.dto.UserRegistrationRequestDto;
 import ru.khananov.services.RegistrationService;
 
 @Service
@@ -23,7 +21,7 @@ public class RegistrationServiceImpl implements RegistrationService {
     }
 
     @Override
-    public void sendUserRequest(PasteUserRequestDto pasteUserRequestDto) {
+    public void sendUserRequest(UserRegistrationRequestDto userRegistrationRequestDto) {
         String url = "http://localhost:8765/api/registration";
 
         HttpHeaders headers = new HttpHeaders();
@@ -33,7 +31,7 @@ public class RegistrationServiceImpl implements RegistrationService {
         String jsonUser;
 
         try {
-            jsonUser = objectMapper.writeValueAsString(pasteUserRequestDto);
+            jsonUser = objectMapper.writeValueAsString(userRegistrationRequestDto);
         } catch (JsonProcessingException e) {
             throw new RuntimeException(e);
         }

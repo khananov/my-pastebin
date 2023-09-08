@@ -1,7 +1,7 @@
 package ru.khananov.services;
 
-import ru.khananov.entities.dto.PasteUserRequestDto;
+import ru.khananov.entities.dto.UserRegistrationRequestDto;
 
 public interface RegistrationService {
-    void sendUserRequest(PasteUserRequestDto pasteUserRequestDto);
+    void sendUserRequest(UserRegistrationRequestDto userRegistrationRequestDto);
 }

@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import ru.khananov.entities.dto.PasteUserRequestDto;
+import ru.khananov.entities.dto.UserRegistrationRequestDto;
 import ru.khananov.services.RegistrationService;
 
 @RestController
@@ -21,8 +21,8 @@ public class RegistrationController {
     }
 
     @PostMapping
-    public ResponseEntity<?> registration(@RequestBody PasteUserRequestDto pasteUserRequestDto) {
-        registrationService.sendUserRequest(pasteUserRequestDto);
+    public ResponseEntity<?> registration(@RequestBody UserRegistrationRequestDto userRegistrationRequestDto) {
+        registrationService.sendUserRequest(userRegistrationRequestDto);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 }

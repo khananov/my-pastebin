@@ -3,15 +3,15 @@ package ru.khananov.entities.dto;
 import java.util.Arrays;
 import java.util.Objects;
 
-public class PasteUserRequestDto {
+public class UserRegistrationRequestDto {
     private String email;
     private char[] password;
     private char[] repeatPassword;
 
-    public PasteUserRequestDto() {
+    public UserRegistrationRequestDto() {
     }
 
-    public PasteUserRequestDto(String email, char[] password, char[] repeatPassword) {
+    public UserRegistrationRequestDto(String email, char[] password, char[] repeatPassword) {
         this.email = email;
         this.password = password;
         this.repeatPassword = repeatPassword;
@@ -45,7 +45,7 @@ public class PasteUserRequestDto {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        PasteUserRequestDto that = (PasteUserRequestDto) o;
+        UserRegistrationRequestDto that = (UserRegistrationRequestDto) o;
         return Objects.equals(email, that.email) && Arrays.equals(password, that.password) && Arrays.equals(repeatPassword, that.repeatPassword);
     }
 
@@ -59,7 +59,7 @@ public class PasteUserRequestDto {
 
     @Override
     public String toString() {
-        return "PasteUserRequestDto{" +
+        return "UserRegistrationRequestDto{" +
                 "email='" + email + '\'' +
                 ", password=" + Arrays.toString(password) +
                 ", repeatPassword=" + Arrays.toString(repeatPassword) +

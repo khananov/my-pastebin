@@ -34,12 +34,12 @@ public class Paste {
 
     @ManyToOne
     @JoinColumn(name = "user_id", referencedColumnName = "id")
-    private PasteUser user;
+    private User user;
 
     public Paste() {
     }
 
-    public Paste(Long id, LocalDateTime created_at, Long expirationTimeSeconds, String payload, AccessModifier modifier, String hash, PasteUser user) {
+    public Paste(Long id, LocalDateTime created_at, Long expirationTimeSeconds, String payload, AccessModifier modifier, String hash, User user) {
         this.id = id;
         this.created_at = created_at;
         this.expirationTimeSeconds = expirationTimeSeconds;
@@ -97,11 +97,11 @@ public class Paste {
         this.hash = hash;
     }
 
-    public PasteUser getUser() {
+    public User getUser() {
         return user;
     }
 
-    public void setUser(PasteUser user) {
+    public void setUser(User user) {
         this.user = user;
     }
 
