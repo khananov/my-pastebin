@@ -8,23 +8,22 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import ru.khananov.entities.dto.UserRegistrationRequestDto;
-import ru.khananov.services.UserService;
+import ru.khananov.services.RegistrationService;
 
 @RestController
 @RequestMapping("/api/registration")
-public class UserController {
-    private final UserService userService;
+public class RegistrationController {
+    private final RegistrationService registrationService;
 
     @Autowired
-    public UserController(UserService userService) {
-        this.userService = userService;
+    public RegistrationController(RegistrationService registrationService) {
+        this.registrationService = registrationService;
     }
 
-    @PostMapping
-    public ResponseEntity<?> registration(@RequestBody UserRegistrationRequestDto userRegistrationRequestDto) {
-        if (userService.registration(userRegistrationRequestDto) == null)
-            return new ResponseEntity<>(HttpStatus.EXPECTATION_FAILED);
-
-        return new ResponseEntity<>(HttpStatus.CREATED);
+    @PostMapping()
+    public ResponseEntity<?> registration(
+            @RequestBody UserRegistrationRequestDto userRegistrationRequestDto) {
+        registrationService.registration(userRegistrationRequestDto);
+        return ResponseEntity.ok(HttpStatus.CREATED);
     }
 }
