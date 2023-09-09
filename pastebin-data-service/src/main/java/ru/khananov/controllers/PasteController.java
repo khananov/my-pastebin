@@ -9,7 +9,7 @@ import ru.khananov.entities.dto.PasteResponseDto;
 import ru.khananov.services.PasteService;
 
 @RestController
-@RequestMapping("api/data")
+@RequestMapping("api/data/pastes")
 public class PasteController {
     private final PasteService pasteService;
 
@@ -21,17 +21,19 @@ public class PasteController {
     @GetMapping("/{hash}")
     public ResponseEntity<?> getByHash(@PathVariable String hash) {
         PasteResponseDto pasteResponseDto = pasteService.getByHash(hash);
+
         if (pasteResponseDto == null)
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 
         return new ResponseEntity<>(pasteResponseDto, HttpStatus.OK);
     }
 
     @PostMapping
     public ResponseEntity<?> save(@RequestBody PasteRequestDto pasteRequestDto) {
-        PasteResponseDto pasteResponseDto = pasteService.create(pasteRequestDto);
+        PasteResponseDto pasteResponseDto = pasteService.save(pasteRequestDto);
+
         if (pasteResponseDto == null)
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 
         return new ResponseEntity<>(pasteResponseDto, HttpStatus.CREATED);
     }

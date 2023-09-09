@@ -12,9 +12,4 @@ public class PastebinDataApplication {
     public static void main(String[] args) {
         SpringApplication.run(PastebinDataApplication.class);
     }
-
-    @Bean
-    public BCryptPasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
 }

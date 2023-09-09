@@ -8,30 +8,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import ru.khananov.entities.dto.UserAuthRequestDto;
 import ru.khananov.entities.dto.UserAuthResponseDto;
-import ru.khananov.entities.dto.UserRegistrationRequestDto;
 import ru.khananov.services.AuthenticateService;
-import ru.khananov.services.RegistrationService;
 
 @RestController
-@RequestMapping("/secure/v1/paste")
+@RequestMapping("/api/authorization/login")
 public class AuthController {
-    private final RegistrationService registrationService;
     private final AuthenticateService authenticateService;
 
     @Autowired
-    public AuthController(RegistrationService registrationService,
-                          AuthenticateService authenticateService) {
-        this.registrationService = registrationService;
+    public AuthController(AuthenticateService authenticateService) {
         this.authenticateService = authenticateService;
     }
 
-    @PostMapping("/registration")
-    public ResponseEntity<UserAuthResponseDto> registration(
-            @RequestBody UserRegistrationRequestDto userRegistrationRequestDto) {
-        return ResponseEntity.ok(registrationService.sendUserRequest(userRegistrationRequestDto));
-    }
-
-    @PostMapping("/login")
+    @PostMapping()
     public ResponseEntity<UserAuthResponseDto> login(
             @RequestBody UserAuthRequestDto userAuthRequestDto) {
         return ResponseEntity.ok(authenticateService.authenticate(userAuthRequestDto));

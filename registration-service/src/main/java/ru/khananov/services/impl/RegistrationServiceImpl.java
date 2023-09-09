@@ -1,47 +1,47 @@
 package ru.khananov.services.impl;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import ru.khananov.entities.User;
 import ru.khananov.entities.dto.UserRegistrationRequestDto;
 import ru.khananov.exceptions.PasswordDoesntMatchException;
 import ru.khananov.exceptions.UserAlreadyExistException;
-import ru.khananov.exceptions.UserNotFoundException;
+import ru.khananov.feignclients.UserFeignClient;
 import ru.khananov.mappers.UserMapper;
-import ru.khananov.repositories.UserRepository;
-import ru.khananov.services.UserService;
+import ru.khananov.services.RegistrationService;
 
 @Service
-public class UserServiceImpl implements UserService {
-    private final UserRepository userRepository;
+public class RegistrationServiceImpl implements RegistrationService {
+    private final Logger log = LoggerFactory.getLogger(UserServiceImpl.class);
+    private final UserFeignClient userFeignClient;
     private final UserMapper userMapper;
     private final PasswordEncoder passwordEncoder;
 
-    public UserServiceImpl(UserRepository userRepository,
-                           UserMapper userMapper,
-                           PasswordEncoder passwordEncoder) {
-        this.userRepository = userRepository;
+    @Autowired
+    public RegistrationServiceImpl(UserFeignClient userFeignClient,
+                                   UserMapper userMapper,
+                                   PasswordEncoder passwordEncoder) {
+        this.userFeignClient = userFeignClient;
         this.userMapper = userMapper;
         this.passwordEncoder = passwordEncoder;
     }
 
     @Override
-    public User getByEmail(String email) {
-        return userRepository.findByEmail(email)
-                .orElseThrow(() -> new UserNotFoundException(email));
-    }
-
-    @Override
-    public UserRegistrationRequestDto registration(UserRegistrationRequestDto userRegistrationRequestDto) {
+    public void registration(UserRegistrationRequestDto userRegistrationRequestDto) {
         encodePassword(userRegistrationRequestDto);
 
         User user = userMapper.toEntity(userRegistrationRequestDto);
 
-        if (userRepository.findByEmail(user.getEmail()).isPresent()) {
+        if (userFeignClient.getByEmail(user.getEmail()).getBody() != null) {
+            log.error(new UserAlreadyExistException(user.getEmail()).getMessage());
             throw new UserAlreadyExistException(user.getEmail());
         }
 
-        return userMapper.toDto(userRepository.save(user));
+        log.info("save user, email - " + user.getEmail());
+        userFeignClient.save(user);
     }
 
     private void encodePassword(UserRegistrationRequestDto user) {
@@ -60,6 +60,7 @@ public class UserServiceImpl implements UserService {
         if (!user.getPassword().equals(user.getRepeatPassword()))
             throw new PasswordDoesntMatchException("Password doesn't match");
 
+        log.info("Passwords match");
         return true;
     }
 }
