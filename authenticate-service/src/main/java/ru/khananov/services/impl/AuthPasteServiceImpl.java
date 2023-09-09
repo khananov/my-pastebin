@@ -22,7 +22,7 @@ public class AuthPasteServiceImpl implements AuthPasteService {
     @Override
     public PasteResponseDto getPaste(String hash, String authHeader) {
         String email = getEmailFromAuthHeader(authHeader);
-        return (pasteFeignClient.getByHash(hash, email)).getBody();
+        return pasteFeignClient.getByHash(hash, email).getBody();
     }
 
     @Override

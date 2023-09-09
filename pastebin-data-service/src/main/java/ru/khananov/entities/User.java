@@ -19,17 +19,13 @@ public class User {
     @Column
     private String password;
 
-    @OneToMany(mappedBy = "user")
-    private List<Paste> pastes;
-
     public User() {
     }
 
-    public User(Long id, String email, String password, List<Paste> pastes) {
+    public User(Long id, String email, String password) {
         this.id = id;
         this.email = email;
         this.password = password;
-        this.pastes = pastes;
     }
 
     public Long getId() {
@@ -56,25 +52,17 @@ public class User {
         this.password = password;
     }
 
-    public List<Paste> getPastes() {
-        return pastes;
-    }
-
-    public void setPastes(List<Paste> pastes) {
-        this.pastes = pastes;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return Objects.equals(id, user.id) && Objects.equals(email, user.email) && Objects.equals(password, user.password) && Objects.equals(pastes, user.pastes);
+        return Objects.equals(id, user.id) && Objects.equals(email, user.email) && Objects.equals(password, user.password);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, email, password, pastes);
+        return Objects.hash(id, email, password);
     }
 
     @Override

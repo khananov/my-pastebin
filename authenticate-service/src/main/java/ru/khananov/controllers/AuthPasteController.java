@@ -20,7 +20,7 @@ public class AuthPasteController {
     }
 
     @GetMapping("/{hash}")
-    public ResponseEntity<PasteResponseDto> getPaste(@PathVariable String hash,
+    public ResponseEntity<PasteResponseDto> getPaste(@PathVariable("hash") String hash,
                                                      HttpServletRequest request) {
         String authHeader = request.getHeader("Authorization");
         PasteResponseDto paste = authPasteService.getPaste(hash, authHeader);
