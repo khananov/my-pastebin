@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import ru.khananov.entities.User;
 import ru.khananov.entities.dto.UserAuthRequestDto;
 import ru.khananov.entities.dto.UserAuthResponseDto;
+import ru.khananov.feignclients.UserFeignClient;
 import ru.khananov.security.jwt.JwtTokenProvider;
 import ru.khananov.services.AuthenticateService;
 import ru.khananov.services.UserService;
@@ -15,15 +16,15 @@ import ru.khananov.services.UserService;
 public class AuthenticateServiceImpl implements AuthenticateService {
     private final AuthenticationManager authenticationManager;
     private final JwtTokenProvider jwtTokenProvider;
-    private final UserService userService;
+    private final UserFeignClient userFeignClient;
 
     @Autowired
     public AuthenticateServiceImpl(AuthenticationManager authenticationManager,
                                    JwtTokenProvider jwtTokenProvider,
-                                   UserService userService) {
+                                   UserFeignClient userFeignClient) {
         this.authenticationManager = authenticationManager;
         this.jwtTokenProvider = jwtTokenProvider;
-        this.userService = userService;
+        this.userFeignClient = userFeignClient;
     }
 
     @Override
@@ -35,8 +36,12 @@ public class AuthenticateServiceImpl implements AuthenticateService {
                 )
         );
 
-        User user = userService.getByEmail(userAuthRequestDto.getEmail());
-        String token = jwtTokenProvider.createToken(user.getEmail());
+        User user = userFeignClient.getByEmail(userAuthRequestDto.getEmail()).getBody();
+        String token = "";
+
+        if (user != null) {
+            token = jwtTokenProvider.createToken(user.getEmail());
+        }
 
         return new UserAuthResponseDto(token);
     }

@@ -4,7 +4,7 @@ import ru.khananov.entities.dto.PasteRequestDto;
 import ru.khananov.entities.dto.PasteResponseDto;
 
 public interface PasteService {
-    PasteResponseDto getByHash(String hash);
+    PasteResponseDto getByHash(String hash, String email);
 
-    PasteResponseDto save(PasteRequestDto pasteRequestDto);
+    PasteResponseDto save(PasteRequestDto pasteRequestDto, String email);
 }

@@ -59,6 +59,12 @@ public class JwtTokenProvider {
                 .getSubject();
     }
 
+    public String extractToken(String authHeader) {
+        int authHeaderLength = 7;
+
+        return authHeader.substring(authHeaderLength);
+    }
+
     public boolean validateToken(String token, UserDetails userDetails) {
         try {
             Date expiration = Jwts.parserBuilder()

@@ -11,7 +11,7 @@ import ru.khananov.entities.dto.UserAuthResponseDto;
 import ru.khananov.services.AuthenticateService;
 
 @RestController
-@RequestMapping("/api/authorization/login")
+@RequestMapping("/api/authentication/login")
 public class AuthController {
     private final AuthenticateService authenticateService;
 

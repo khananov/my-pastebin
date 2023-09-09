@@ -19,8 +19,10 @@ public class PasteController {
     }
 
     @GetMapping("/{hash}")
-    public ResponseEntity<?> getByHash(@PathVariable String hash) {
-        PasteResponseDto pasteResponseDto = pasteService.getByHash(hash);
+    public ResponseEntity<PasteResponseDto> getByHash(@PathVariable String hash,
+                                                      @RequestParam String email) {
+        System.out.println(hash + " " + email);
+        PasteResponseDto pasteResponseDto = pasteService.getByHash(hash, email);
 
         if (pasteResponseDto == null)
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -29,8 +31,10 @@ public class PasteController {
     }
 
     @PostMapping
-    public ResponseEntity<?> save(@RequestBody PasteRequestDto pasteRequestDto) {
-        PasteResponseDto pasteResponseDto = pasteService.save(pasteRequestDto);
+    public ResponseEntity<PasteResponseDto> save(@RequestBody PasteRequestDto pasteRequestDto,
+                                                 @RequestParam String email) {
+        System.out.println(email);
+        PasteResponseDto pasteResponseDto = pasteService.save(pasteRequestDto, email);
 
         if (pasteResponseDto == null)
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
