@@ -46,6 +46,7 @@ public class PasteServiceImpl implements PasteService {
         }
 
         Paste paste = pasteOptional.get();
+
         if (checkValidPaste(paste, email))
             return pasteMapper.toDto(paste);
 
@@ -74,7 +75,10 @@ public class PasteServiceImpl implements PasteService {
     }
 
     private boolean checkValidPaste(Paste paste, String email) {
-        if (!checkExpirationTime(paste)) return false;
+        if (checkExpirationTime(paste)) {
+            pasteRepository.delete(paste);
+            return false;
+        }
 
         if (paste.getModifier().equals(AccessModifier.PUBLIC)) return true;
 
