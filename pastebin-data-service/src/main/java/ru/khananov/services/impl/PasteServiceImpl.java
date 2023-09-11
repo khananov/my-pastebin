@@ -16,6 +16,7 @@ import ru.khananov.repositories.PasteRepository;
 import ru.khananov.services.PasteService;
 import ru.khananov.services.UserService;
 
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 @Service
@@ -45,13 +46,10 @@ public class PasteServiceImpl implements PasteService {
         }
 
         Paste paste = pasteOptional.get();
-        if (paste.getModifier().equals(AccessModifier.PUBLIC))
+        if (checkValidPaste(paste, email))
             return pasteMapper.toDto(paste);
 
-        if (paste.getUser().getEmail().equals(email))
-            return pasteMapper.toDto(paste);
-        else
-            return null;
+        return null;
     }
 
     @Override
@@ -73,5 +71,18 @@ public class PasteServiceImpl implements PasteService {
         return Long.toHexString(
                 paste.getId() + paste.getUser().getId() + paste.getCreatedAt().getNano()
         );
+    }
+
+    private boolean checkValidPaste(Paste paste, String email) {
+        if (!checkExpirationTime(paste)) return false;
+
+        if (paste.getModifier().equals(AccessModifier.PUBLIC)) return true;
+
+        return paste.getUser().getEmail().equals(email);
+    }
+
+    private boolean checkExpirationTime(Paste paste) {
+        return paste.getCreatedAt().plusSeconds(paste.getExpirationTimeSeconds())
+                .isBefore(LocalDateTime.now());
     }
 }
