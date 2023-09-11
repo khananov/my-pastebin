@@ -1,5 +1,6 @@
 package ru.khananov.controllers;
 
+import io.swagger.v3.oas.annotations.Operation;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -20,6 +21,7 @@ public class AuthPasteController {
     }
 
     @GetMapping("/{hash}")
+    @Operation(description = "This method is used for getting paste to auth users")
     public ResponseEntity<PasteResponseDto> getPaste(@PathVariable("hash") String hash,
                                                      HttpServletRequest request) {
         String authHeader = request.getHeader("Authorization");
@@ -32,6 +34,7 @@ public class AuthPasteController {
     }
 
     @PostMapping
+    @Operation(description = "This method is used for saving paste by auth users")
     public ResponseEntity<PasteResponseDto> save(@RequestBody PasteRequestDto pasteRequestDto,
                                                  HttpServletRequest request) {
         String authHeader = request.getHeader("Authorization");

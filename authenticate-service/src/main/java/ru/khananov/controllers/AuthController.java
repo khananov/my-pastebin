@@ -1,5 +1,6 @@
 package ru.khananov.controllers;
 
+import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,6 +22,7 @@ public class AuthController {
     }
 
     @PostMapping()
+    @Operation(description = "This method is used for authenticate users")
     public ResponseEntity<UserAuthResponseDto> login(
             @RequestBody UserAuthRequestDto userAuthRequestDto) {
         return ResponseEntity.ok(authenticateService.authenticate(userAuthRequestDto));

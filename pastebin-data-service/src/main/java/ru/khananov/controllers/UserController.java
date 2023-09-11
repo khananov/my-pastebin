@@ -1,5 +1,6 @@
 package ru.khananov.controllers;
 
+import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -30,6 +31,8 @@ public class UserController {
     }
 
     @PostMapping
+    @Operation(description = "This method is used for registration service communication",
+            hidden = true)
     public ResponseEntity<UserResponseDto> save(@RequestBody User user) {
         UserResponseDto userResponseDto = userService.save(user);
         if (userResponseDto == null)
