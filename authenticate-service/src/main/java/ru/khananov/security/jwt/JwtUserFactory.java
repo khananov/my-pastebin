@@ -1,6 +1,6 @@
 package ru.khananov.security.jwt;
 
-import ru.khananov.entities.User;
+import ru.khananov.data.entities.User;
 
 import java.util.ArrayList;
 

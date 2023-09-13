@@ -12,17 +12,17 @@
 
 	<groupId>ru.khananov</groupId>
 	<artifactId>my-pastebin</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.1</version>
     <packaging>pom</packaging>
     <name>MyPastebin</name>
 	<description>Demo project for Spring Boot</description>
 
     <modules>
-        <module>eureka-server</module>
-        <module>pastebin-data-service</module>
-        <module>cloud-gateway</module>
-        <module>authenticate-service</module>
+		<module>pastebin-data-service</module>
+		<module>eureka-server</module>
+		<module>cloud-gateway</module>
 		<module>registration-service</module>
+		<module>authenticate-service</module>
 	</modules>
 
     <properties>
@@ -76,6 +76,16 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				<executions>
+					<execution>
+						<goals>
+							<goal>repackage</goal>
+						</goals>
+						<configuration>
+							<classifier>exec</classifier>
+						</configuration>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>

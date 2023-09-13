@@ -5,7 +5,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-import ru.khananov.entities.User;
+import ru.khananov.data.entities.User;
 import ru.khananov.feignclients.UserFeignClient;
 
 @Service

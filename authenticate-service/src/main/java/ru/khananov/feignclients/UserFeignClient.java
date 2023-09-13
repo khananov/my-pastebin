@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
-import ru.khananov.entities.User;
+import ru.khananov.data.entities.User;
 
 @FeignClient(name = "pastebin-data-service", url = "http://localhost:8765/api/data/users")
 public interface UserFeignClient {

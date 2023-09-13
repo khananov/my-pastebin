@@ -3,8 +3,8 @@ package ru.khananov.feignclients;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import ru.khananov.entities.dto.PasteRequestDto;
-import ru.khananov.entities.dto.PasteResponseDto;
+import ru.khananov.data.entities.dto.PasteRequestDto;
+import ru.khananov.data.entities.dto.PasteResponseDto;
 
 @FeignClient(name = "paste-data-service", url = "http://localhost:8765/api/data/pastes")
 public interface PasteFeignClient {
