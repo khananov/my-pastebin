@@ -2,11 +2,11 @@ FROM eclipse-temurin:17 as app-build
 ENV RELEASE=17
 
 WORKDIR /opt/build
-COPY ./target/*.jar ./application.jar
+COPY ./target/registration-service-0.0.1.jar ./application.jar
 
 RUN java -Djarmode=layertools -jar application.jar extract
 RUN $JAVA_HOME/bin/jlink \
-         --add-modules `jdeps --ignore-missing-deps -q -recursive --multi-release ${RELEASE} --print-module-deps -cp 'dependencies/BOOT-INF/lib/*':'snapshot-dependencies/BOOT-INF/lib/*' application.jar` \
+         --add-modules `jdeps --ignore-missing-deps -q -recursive --multi-release ${RELEASE} --print-module-deps -cp 'dependencies/BOOT-INF/lib/*': application.jar` \
          --strip-debug \
          --no-man-pages \
          --no-header-files \

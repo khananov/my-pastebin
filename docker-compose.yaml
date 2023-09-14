@@ -1,0 +1,81 @@
+version: '3.3'
+
+services:
+  db:
+    image: postgres:15
+    container_name: db-postgres-pastebin
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 123
+      POSTGRES_DB: pastebin
+    volumes:
+      - /var/lib/postgresql/data
+    restart:
+      unless-stopped
+
+  eureka-server:
+    image: eureka-server:1.0
+    container_name: eureka-server
+    build:
+      context: ./eureka-server
+      dockerfile: Dockerfile
+    ports:
+      - 8761:8761
+    restart:
+      unless-stopped
+
+  pastebin-data:
+    image: pastebin-data:1.0
+    container_name: pastebin-data
+    build:
+      context: ./pastebin-data-service
+      dockerfile: Dockerfile
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/pastebin
+    restart:
+      unless-stopped
+    depends_on:
+      - db
+      - eureka-server
+
+  registration-service:
+    image: registration-service:1.0
+    container_name: registration-service
+    build:
+      context: ./registration-service
+      dockerfile: Dockerfile
+    restart:
+      unless-stopped
+    depends_on:
+      - eureka-server
+      - pastebin-data
+
+  authenticate-service:
+    image: authenticate-service:1.0
+    container_name: authenticate-service
+    build:
+      context: ./authenticate-service
+      dockerfile: Dockerfile
+    restart:
+      unless-stopped
+    depends_on:
+      - eureka-server
+      - pastebin-data
+
+  cloud-gateway:
+    image: cloud-gateway:1.0
+    container_name: cloud-gateway
+    build:
+      context: ./cloud-gateway
+      dockerfile: Dockerfile
+    ports:
+      - 8765:8765
+    restart:
+      unless-stopped
+    depends_on:
+      - eureka-server
+      - pastebin-data
+      - registration-service
+      - authenticate-service
