@@ -1,4 +1,4 @@
-package ru.khananov.data.services;
+package ru.khananov.services;
 
 import ru.khananov.data.entities.dto.PasteRequestDto;
 import ru.khananov.data.entities.dto.PasteResponseDto;

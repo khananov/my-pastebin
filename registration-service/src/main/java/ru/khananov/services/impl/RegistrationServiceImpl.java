@@ -1,4 +1,4 @@
-package ru.khananov.data.services.impl;
+package ru.khananov.services.impl;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -9,9 +9,10 @@ import ru.khananov.data.entities.User;
 import ru.khananov.data.entities.dto.UserRegistrationRequestDto;
 import ru.khananov.data.exceptions.PasswordDoesntMatchException;
 import ru.khananov.data.exceptions.UserAlreadyExistException;
+import ru.khananov.data.services.impl.UserServiceImpl;
 import ru.khananov.feignclients.UserFeignClient;
 import ru.khananov.data.mappers.UserMapper;
-import ru.khananov.data.services.RegistrationService;
+import ru.khananov.services.RegistrationService;
 
 @Service
 public class RegistrationServiceImpl implements RegistrationService {

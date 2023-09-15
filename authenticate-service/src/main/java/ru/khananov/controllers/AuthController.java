@@ -1,4 +1,4 @@
-package ru.khananov.data.controllers;
+package ru.khananov.controllers;
 
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import ru.khananov.data.entities.dto.UserAuthRequestDto;
 import ru.khananov.data.entities.dto.UserAuthResponseDto;
-import ru.khananov.data.services.AuthenticateService;
+import ru.khananov.services.AuthenticateService;
 
 @RestController
 @RequestMapping("/api/authentication/login")

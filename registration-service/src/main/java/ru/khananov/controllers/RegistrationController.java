@@ -1,4 +1,4 @@
-package ru.khananov.data.controllers;
+package ru.khananov.controllers;
 
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import ru.khananov.data.entities.dto.UserRegistrationRequestDto;
-import ru.khananov.data.services.RegistrationService;
+import ru.khananov.services.RegistrationService;
 
 @RestController
 @RequestMapping("/api/registration")

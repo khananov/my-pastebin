@@ -1,4 +1,4 @@
-package ru.khananov.data.services.impl;
+package ru.khananov.services.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -6,7 +6,7 @@ import ru.khananov.data.entities.dto.PasteRequestDto;
 import ru.khananov.data.entities.dto.PasteResponseDto;
 import ru.khananov.feignclients.PasteFeignClient;
 import ru.khananov.security.jwt.JwtTokenProvider;
-import ru.khananov.data.services.AuthPasteService;
+import ru.khananov.services.AuthPasteService;
 
 @Service
 public class AuthPasteServiceImpl implements AuthPasteService {

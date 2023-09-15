@@ -1,4 +1,4 @@
-package ru.khananov.data.controllers;
+package ru.khananov.controllers;
 
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.servlet.http.HttpServletRequest;
@@ -8,7 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.khananov.data.entities.dto.PasteRequestDto;
 import ru.khananov.data.entities.dto.PasteResponseDto;
-import ru.khananov.data.services.AuthPasteService;
+import ru.khananov.services.AuthPasteService;
 
 @RestController
 @RequestMapping("/api/authentication/paste")

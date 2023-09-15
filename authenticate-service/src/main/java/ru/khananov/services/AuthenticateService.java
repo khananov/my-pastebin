@@ -1,4 +1,4 @@
-package ru.khananov.data.services;
+package ru.khananov.services;
 
 import ru.khananov.data.entities.dto.UserAuthRequestDto;
 import ru.khananov.data.entities.dto.UserAuthResponseDto;

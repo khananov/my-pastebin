@@ -1,4 +1,4 @@
-package ru.khananov.data.services.impl;
+package ru.khananov.services.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -9,7 +9,7 @@ import ru.khananov.data.entities.dto.UserAuthRequestDto;
 import ru.khananov.data.entities.dto.UserAuthResponseDto;
 import ru.khananov.feignclients.UserFeignClient;
 import ru.khananov.security.jwt.JwtTokenProvider;
-import ru.khananov.data.services.AuthenticateService;
+import ru.khananov.services.AuthenticateService;
 
 @Service
 public class AuthenticateServiceImpl implements AuthenticateService {
