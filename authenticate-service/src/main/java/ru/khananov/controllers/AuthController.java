@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import ru.khananov.data.entities.dto.UserAuthRequestDto;
-import ru.khananov.data.entities.dto.UserAuthResponseDto;
+import ru.khananov.dto.UserAuthRequestDto;
+import ru.khananov.dto.UserAuthResponseDto;
 import ru.khananov.services.AuthenticateService;
 
 @RestController

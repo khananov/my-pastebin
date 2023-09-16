@@ -67,22 +67,22 @@ services:
       - eureka-server
       - pastebin-data
 
-#  authenticate-service:
-#    image: authenticate-service:1.0
-#    container_name: authenticate-service
-#    build:
-#      context: ./authenticate-service
-#      dockerfile: Dockerfile
-#    networks:
-#      - ms-network
-#    environment:
-#      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/pastebin
-#      eureka.client.serviceUrl.defaultZone: http://eureka-server:8761/eureka/
-#    restart:
-#      unless-stopped
-#    depends_on:
-#      - eureka-server
-#      - pastebin-data
+  authenticate-service:
+    image: authenticate-service:1.0
+    container_name: authenticate-service
+    build:
+      context: ./authenticate-service
+      dockerfile: Dockerfile
+    networks:
+      - ms-network
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/pastebin
+      eureka.client.serviceUrl.defaultZone: http://eureka-server:8761/eureka/
+    restart:
+      unless-stopped
+    depends_on:
+      - eureka-server
+      - pastebin-data
 
   cloud-gateway:
     image: cloud-gateway:1.0
@@ -103,7 +103,7 @@ services:
       - eureka-server
       - pastebin-data
       - registration-service
-#      - authenticate-service
+      - authenticate-service
 
 networks:
   ms-network:

@@ -1,7 +1,7 @@
 package ru.khananov.services;
 
-import ru.khananov.data.entities.dto.PasteRequestDto;
-import ru.khananov.data.entities.dto.PasteResponseDto;
+import ru.khananov.dto.PasteRequestDto;
+import ru.khananov.dto.PasteResponseDto;
 
 public interface AuthPasteService {
 

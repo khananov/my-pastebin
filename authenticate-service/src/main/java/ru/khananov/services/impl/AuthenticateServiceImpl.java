@@ -4,9 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.stereotype.Service;
-import ru.khananov.data.entities.User;
-import ru.khananov.data.entities.dto.UserAuthRequestDto;
-import ru.khananov.data.entities.dto.UserAuthResponseDto;
+import ru.khananov.dto.UserResponseDto;
+import ru.khananov.dto.UserAuthRequestDto;
+import ru.khananov.dto.UserAuthResponseDto;
 import ru.khananov.feignclients.UserFeignClient;
 import ru.khananov.security.jwt.JwtTokenProvider;
 import ru.khananov.services.AuthenticateService;
@@ -35,7 +35,7 @@ public class AuthenticateServiceImpl implements AuthenticateService {
                 )
         );
 
-        User user = userFeignClient.getByEmail(userAuthRequestDto.getEmail()).getBody();
+        UserResponseDto user = userFeignClient.getByEmail(userAuthRequestDto.getEmail()).getBody();
         String token = "";
 
         if (user != null) {

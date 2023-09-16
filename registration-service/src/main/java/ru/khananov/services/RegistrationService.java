@@ -1,6 +1,6 @@
 package ru.khananov.services;
 
-import ru.khananov.data.entities.dto.UserRegistrationRequestDto;
+import ru.khananov.dto.UserRegistrationRequestDto;
 
 public interface RegistrationService {
     void registration(UserRegistrationRequestDto userRegistrationRequestDto);

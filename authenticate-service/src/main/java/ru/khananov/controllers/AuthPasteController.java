@@ -6,8 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import ru.khananov.data.entities.dto.PasteRequestDto;
-import ru.khananov.data.entities.dto.PasteResponseDto;
+import ru.khananov.dto.PasteRequestDto;
+import ru.khananov.dto.PasteResponseDto;
 import ru.khananov.services.AuthPasteService;
 
 @RestController

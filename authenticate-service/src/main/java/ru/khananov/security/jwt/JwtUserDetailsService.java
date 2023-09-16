@@ -5,7 +5,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-import ru.khananov.data.entities.User;
+import ru.khananov.dto.UserResponseDto;
 import ru.khananov.feignclients.UserFeignClient;
 
 @Service
@@ -19,7 +19,7 @@ public class JwtUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        User user = userFeignClient.getByEmail(email).getBody();
+        UserResponseDto user = userFeignClient.getByEmail(email).getBody();
 
         return JwtUserFactory.create(user);
     }
