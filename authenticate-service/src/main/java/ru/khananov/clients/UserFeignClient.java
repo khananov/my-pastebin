@@ -1,4 +1,4 @@
-package ru.khananov.feignclients;
+package ru.khananov.clients;
 
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.ResponseEntity;

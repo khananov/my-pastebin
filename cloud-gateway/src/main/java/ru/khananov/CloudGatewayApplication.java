@@ -1,7 +1,5 @@
 package ru.khananov;
 
-import io.swagger.v3.oas.annotations.OpenAPIDefinition;
-import io.swagger.v3.oas.annotations.info.Info;
 import org.springdoc.core.models.GroupedOpenApi;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
@@ -16,7 +14,6 @@ import java.util.List;
 
 @SpringBootApplication
 @EnableDiscoveryClient
-@OpenAPIDefinition(info = @Info(title = "Info getweay"))
 public class CloudGatewayApplication {
     public static void main(String[] args) {
         SpringApplication.run(CloudGatewayApplication.class);

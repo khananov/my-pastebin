@@ -33,6 +33,9 @@
 		<jjwt.version>0.11.5</jjwt.version>
 		<jakarta.bind-api.version>4.0.0</jakarta.bind-api.version>
 		<liquibase.version>4.22.0</liquibase.version>
+		<openapi.webflux-ui.version>2.2.0</openapi.webflux-ui.version>
+		<openapi.webflux-api.version>2.2.0</openapi.webflux-api.version>
+		<openapi.webmvc-ui.version>2.2.0</openapi.webmvc-ui.version>
 	</properties>
 
 	<dependencies>

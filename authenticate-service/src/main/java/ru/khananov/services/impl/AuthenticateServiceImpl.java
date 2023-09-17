@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import ru.khananov.dto.UserResponseDto;
 import ru.khananov.dto.UserAuthRequestDto;
 import ru.khananov.dto.UserAuthResponseDto;
-import ru.khananov.feignclients.UserFeignClient;
+import ru.khananov.clients.UserFeignClient;
 import ru.khananov.security.jwt.JwtTokenProvider;
 import ru.khananov.services.AuthenticateService;
 

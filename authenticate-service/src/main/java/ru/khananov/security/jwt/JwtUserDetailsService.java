@@ -6,7 +6,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import ru.khananov.dto.UserResponseDto;
-import ru.khananov.feignclients.UserFeignClient;
+import ru.khananov.clients.UserFeignClient;
 
 @Service
 public class JwtUserDetailsService implements UserDetailsService {

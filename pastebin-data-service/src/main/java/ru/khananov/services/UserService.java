@@ -1,6 +1,5 @@
 package ru.khananov.services;
 
-import ru.khananov.entities.User;
 import ru.khananov.entities.dto.UserRegistrationRequestDto;
 import ru.khananov.entities.dto.UserResponseDto;
 

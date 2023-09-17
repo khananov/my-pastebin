@@ -5,7 +5,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import ru.khananov.entities.User;
 import ru.khananov.entities.dto.UserRegistrationRequestDto;
 import ru.khananov.entities.dto.UserResponseDto;
 import ru.khananov.services.UserService;

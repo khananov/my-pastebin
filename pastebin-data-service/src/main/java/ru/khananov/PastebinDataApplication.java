@@ -11,7 +11,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 @SpringBootApplication
 @EnableDiscoveryClient
 @OpenAPIDefinition(info =
-@Info(title = "Employee API"))
+@Info(title = "Pastebin-data API", version = "0.1", description = "Documentation Pastebin-data API v0.1"))
 public class PastebinDataApplication {
     public static void main(String[] args) {
         SpringApplication.run(PastebinDataApplication.class);

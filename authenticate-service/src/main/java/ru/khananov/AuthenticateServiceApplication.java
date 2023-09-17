@@ -13,7 +13,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 @EnableDiscoveryClient
 @EnableFeignClients
 @OpenAPIDefinition(info =
-@Info(title = "Employee API"))
+@Info(title = "Authenticate API", version = "0.1", description = "Documentation Authenticate API v0.1"))
 public class AuthenticateServiceApplication {
     public static void main(String[] args) {
         SpringApplication.run(AuthenticateServiceApplication.class);

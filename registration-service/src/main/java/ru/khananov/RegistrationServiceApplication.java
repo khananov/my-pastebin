@@ -14,7 +14,7 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 @EnableDiscoveryClient
 @EnableFeignClients
 @OpenAPIDefinition(info =
-@Info(title = "Employee API"))
+@Info(title = "Registration-service API", version = "0.1", description = "Documentation Registration-service API v0.1"))
 public class RegistrationServiceApplication {
     public static void main(String[] args) {
         SpringApplication.run(RegistrationServiceApplication.class);
