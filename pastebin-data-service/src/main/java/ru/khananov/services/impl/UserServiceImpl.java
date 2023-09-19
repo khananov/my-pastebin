@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import ru.khananov.entities.User;
 import ru.khananov.entities.dto.UserRegistrationRequestDto;
 import ru.khananov.entities.dto.UserResponseDto;
-import ru.khananov.exceptions.PasswordDoesntMatchException;
+import ru.khananov.exceptions.PasswordsDontMatchException;
 import ru.khananov.exceptions.UserAlreadyExistException;
 import ru.khananov.exceptions.UserNotFoundException;
 import ru.khananov.mappers.UserMapper;
@@ -33,7 +33,7 @@ public class UserServiceImpl implements UserService {
     public UserResponseDto save(UserRegistrationRequestDto userRegistrationRequestDto) {
         if (userRegistrationRequestDto == null) return null;
 
-        if (getByEmail(userRegistrationRequestDto.getEmail()) != null) {
+        if (userRepository.findByEmail(userRegistrationRequestDto.getEmail()).isPresent()) {
             log.error(new UserAlreadyExistException(userRegistrationRequestDto.getEmail()).getMessage());
             throw new UserAlreadyExistException(userRegistrationRequestDto.getEmail());
         }
@@ -53,7 +53,7 @@ public class UserServiceImpl implements UserService {
     }
 
     private void encodePassword(UserRegistrationRequestDto user) {
-        if (checkPasswordMatching(user)) {
+        if (checkPasswordsMatching(user)) {
             user.setPassword(
                     passwordEncoder.encode(user.getPassword())
             );
@@ -64,9 +64,9 @@ public class UserServiceImpl implements UserService {
         }
     }
 
-    private boolean checkPasswordMatching(UserRegistrationRequestDto user) {
+    private boolean checkPasswordsMatching(UserRegistrationRequestDto user) {
         if (!user.getPassword().equals(user.getRepeatPassword()))
-            throw new PasswordDoesntMatchException("Password doesn't match");
+            throw new PasswordsDontMatchException("Passwords doesn't match");
 
         log.info("Passwords match");
         return true;

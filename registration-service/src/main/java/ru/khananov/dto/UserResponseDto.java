@@ -1,10 +1,14 @@
 package ru.khananov.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.util.Objects;
 
 public class UserResponseDto {
     private Long id;
     private String email;
+
+    @JsonIgnore
     private String password;
 
     public UserResponseDto() {

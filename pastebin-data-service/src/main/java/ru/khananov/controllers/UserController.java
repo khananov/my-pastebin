@@ -1,8 +1,11 @@
 package ru.khananov.controllers;
 
+import io.swagger.v3.core.util.Json;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.khananov.entities.dto.UserRegistrationRequestDto;
@@ -19,14 +22,17 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping
+    @GetMapping()
     public ResponseEntity<UserResponseDto> getByEmail(@RequestParam("email") String email) {
         UserResponseDto userResponseDto = userService.getByEmail(email);
 
         if (userResponseDto == null)
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 
-        return new ResponseEntity<>(userResponseDto, HttpStatus.OK);
+        HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.setContentType(MediaType.APPLICATION_JSON);
+
+        return new ResponseEntity<>(userResponseDto, httpHeaders, HttpStatus.OK);
     }
 
     @PostMapping
@@ -35,9 +41,13 @@ public class UserController {
     public ResponseEntity<UserResponseDto> save(
             @RequestBody UserRegistrationRequestDto userRegistrationRequestDto) {
         UserResponseDto userResponseDto = userService.save(userRegistrationRequestDto);
+
         if (userResponseDto == null)
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 
-        return new ResponseEntity<>(userResponseDto, HttpStatus.CREATED);
+        HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.setContentType(MediaType.APPLICATION_JSON);
+
+        return new ResponseEntity<>(userResponseDto, httpHeaders, HttpStatus.OK);
     }
 }

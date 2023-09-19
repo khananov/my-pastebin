@@ -1,7 +1,9 @@
 package ru.khananov.services;
 
+import org.springframework.http.ResponseEntity;
 import ru.khananov.dto.UserRegistrationRequestDto;
+import ru.khananov.dto.UserResponseDto;
 
 public interface RegistrationService {
-    void registration(UserRegistrationRequestDto userRegistrationRequestDto);
+    ResponseEntity<UserResponseDto> registration(UserRegistrationRequestDto userRegistrationRequestDto);
 }

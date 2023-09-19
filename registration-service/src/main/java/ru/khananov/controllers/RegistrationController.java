@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import ru.khananov.dto.UserRegistrationRequestDto;
+import ru.khananov.dto.UserResponseDto;
 import ru.khananov.services.RegistrationService;
 
 @RestController
@@ -23,9 +24,8 @@ public class RegistrationController {
 
     @PostMapping()
     @Operation(description = "This method is used for registration users")
-    public ResponseEntity<?> registration(
+    public ResponseEntity<UserResponseDto> registration(
             @RequestBody UserRegistrationRequestDto userRegistrationRequestDto) {
-        registrationService.registration(userRegistrationRequestDto);
-        return ResponseEntity.ok(HttpStatus.CREATED);
+        return registrationService.registration(userRegistrationRequestDto);
     }
 }
