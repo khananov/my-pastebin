@@ -2,7 +2,9 @@ package ru.khananov.controllers;
 
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.khananov.entities.dto.PasteRequestDto;
@@ -24,13 +26,15 @@ public class PasteController {
             hidden = true)
     public ResponseEntity<PasteResponseDto> getByHash(@PathVariable String hash,
                                                       @RequestParam String email) {
-        System.out.println(hash + " " + email);
         PasteResponseDto pasteResponseDto = pasteService.getByHash(hash, email);
 
         if (pasteResponseDto == null)
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 
-        return new ResponseEntity<>(pasteResponseDto, HttpStatus.OK);
+        HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.setContentType(MediaType.APPLICATION_JSON);
+
+        return new ResponseEntity<>(pasteResponseDto, httpHeaders, HttpStatus.OK);
     }
 
     @PostMapping
@@ -44,6 +48,9 @@ public class PasteController {
         if (pasteResponseDto == null)
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 
-        return new ResponseEntity<>(pasteResponseDto, HttpStatus.CREATED);
+        HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.setContentType(MediaType.APPLICATION_JSON);
+
+        return new ResponseEntity<>(pasteResponseDto, httpHeaders, HttpStatus.CREATED);
     }
 }
