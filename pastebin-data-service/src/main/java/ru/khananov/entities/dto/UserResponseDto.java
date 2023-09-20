@@ -8,7 +8,6 @@ public class UserResponseDto {
     private Long id;
     private String email;
 
-    @JsonIgnore
     private String password;
 
     public UserResponseDto() {
