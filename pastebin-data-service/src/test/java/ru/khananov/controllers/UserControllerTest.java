@@ -12,7 +12,6 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import ru.khananov.entities.dto.UserRegistrationRequestDto;
 import ru.khananov.entities.dto.UserResponseDto;
-import ru.khananov.exceptions.UserAlreadyExistException;
 import ru.khananov.services.UserService;
 
 import static org.junit.jupiter.api.Assertions.*;

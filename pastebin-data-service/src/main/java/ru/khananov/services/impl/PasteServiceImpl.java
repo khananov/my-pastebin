@@ -61,6 +61,10 @@ public class PasteServiceImpl implements PasteService {
     @Transactional
     public PasteResponseDto save(PasteRequestDto pasteRequestDto, String email) {
         UserResponseDto userResponseDto = userService.getByEmail(email);
+
+        if (userResponseDto == null)
+            return null;
+
         Paste paste = pasteMapper.toEntity(pasteRequestDto);
         paste.setUser(userMapper.toEntity(userResponseDto));
         pasteRepository.save(paste);

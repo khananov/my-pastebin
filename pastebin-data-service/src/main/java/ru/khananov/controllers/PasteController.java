@@ -42,7 +42,6 @@ public class PasteController {
             hidden = true)
     public ResponseEntity<PasteResponseDto> save(@RequestBody PasteRequestDto pasteRequestDto,
                                                  @RequestParam String email) {
-        System.out.println(email);
         PasteResponseDto pasteResponseDto = pasteService.save(pasteRequestDto, email);
 
         if (pasteResponseDto == null)
