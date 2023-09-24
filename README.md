@@ -4,7 +4,7 @@ This is my equivalent of the pastebin service. It can register new users, authen
 ***
 ## Technology stack
 Java 17, Maven 3, Spring (Boot, MVC, Data, Cloud, Security),
-Hibernate, Postgresql, Liquibase, REST, Logback, Swagger, Docker Compose
+Hibernate, Postgresql, Liquibase, REST, Logback, Swagger, Docker Compose, Junit
 
 ***
 
