@@ -6,10 +6,12 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.context.annotation.Bean;
+import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @SpringBootApplication
 @EnableDiscoveryClient
+@EnableScheduling
 @OpenAPIDefinition(info =
 @Info(title = "Pastebin-data API", version = "0.1", description = "Documentation Pastebin-data API v0.1"))
 public class PastebinDataApplication {

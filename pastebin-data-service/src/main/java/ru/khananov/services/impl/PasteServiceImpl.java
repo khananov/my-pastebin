@@ -3,6 +3,7 @@ package ru.khananov.services.impl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.khananov.entities.Paste;
@@ -18,7 +19,9 @@ import ru.khananov.services.PasteService;
 import ru.khananov.services.UserService;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
+import java.util.function.Predicate;
 
 @Service
 public class PasteServiceImpl implements PasteService {
@@ -76,6 +79,15 @@ public class PasteServiceImpl implements PasteService {
         return pasteMapper.toDto(paste);
     }
 
+    @Scheduled(fixedDelay = 60000)
+    void checkDbForInvalidExpirationTime() {
+        List<Paste> pasteList = pasteRepository.findAll().stream()
+                .filter(Predicate.not(this::checkExpirationTime))
+                .toList();
+
+        pasteRepository.deleteAllInBatch(pasteList);
+    }
+
     private String createHash(Paste paste) {
         return Long.toHexString(
                 paste.getId() + paste.getUser().getId() + paste.getCreatedAt().getNano()
@@ -83,7 +95,7 @@ public class PasteServiceImpl implements PasteService {
     }
 
     private boolean checkValidPaste(Paste paste, String email) {
-        if (checkExpirationTime(paste)) {
+        if (!checkExpirationTime(paste)) {
             pasteRepository.delete(paste);
             return false;
         }
@@ -95,6 +107,6 @@ public class PasteServiceImpl implements PasteService {
 
     private boolean checkExpirationTime(Paste paste) {
         return paste.getCreatedAt().plusSeconds(paste.getExpirationTimeSeconds())
-                .isBefore(LocalDateTime.now());
+                .isAfter(LocalDateTime.now());
     }
 }

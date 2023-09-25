@@ -127,7 +127,7 @@ public class Paste {
                 ", payload='" + payload + '\'' +
                 ", modifier=" + modifier +
                 ", hash='" + hash + '\'' +
-                ", user=" + user +
+//                ", user=" + user +
                 '}';
     }
 }
