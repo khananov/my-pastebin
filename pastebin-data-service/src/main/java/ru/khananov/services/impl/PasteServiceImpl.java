@@ -46,14 +46,12 @@ public class PasteServiceImpl implements PasteService {
     @Transactional
     public PasteResponseDto getByHash(String hash, String email) {
         Optional<Paste> pasteOptional = pasteRepository.findByHash(hash);
-
         if (pasteOptional.isEmpty()) {
             log.error(new HashNotFoundException(hash).getMessage());
             return null;
         }
 
         Paste paste = pasteOptional.get();
-
         if (checkValidPaste(paste, email))
             return pasteMapper.toDto(paste);
 
@@ -64,15 +62,13 @@ public class PasteServiceImpl implements PasteService {
     @Transactional
     public PasteResponseDto save(PasteRequestDto pasteRequestDto, String email) {
         UserResponseDto userResponseDto = userService.getByEmail(email);
-
         if (userResponseDto == null)
             return null;
 
         Paste paste = pasteMapper.toEntity(pasteRequestDto);
         paste.setUser(userMapper.toEntity(userResponseDto));
         pasteRepository.save(paste);
-
-        paste.setHash(createHash(paste));
+        paste.setHash(createHash(paste, email));
 
         log.info("Paste saved, hash - " + paste.getHash());
 
@@ -88,10 +84,17 @@ public class PasteServiceImpl implements PasteService {
         pasteRepository.deleteAllInBatch(pasteList);
     }
 
-    private String createHash(Paste paste) {
-        return Long.toHexString(
-                paste.getId() + paste.getUser().getId() + paste.getCreatedAt().getNano()
-        );
+    private String createHash(Paste paste, String email) {
+        StringBuilder hash = new StringBuilder(Long.toHexString(
+                paste.getId() + paste.getUser().getId() +
+                        paste.getCreatedAt().getNano() + LocalDateTime.now().getNano()
+        ));
+
+        while (getByHash(hash.toString(), email) != null) {
+            hash.append((int) (Math.random() * 10));
+        }
+
+        return hash.toString();
     }
 
     private boolean checkValidPaste(Paste paste, String email) {
